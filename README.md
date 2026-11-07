@@ -101,6 +101,8 @@ Sail runs the app, a queue worker (it sends the emails), a scheduler (it cleans 
 
 ## Adding a module
 
+![make:module creating a Products module: the command, migrate, the tests passing, then the new admin screens and API docs](docs/screenshots/make-module.gif)
+
 ```bash
 ./vendor/bin/sail artisan make:module Category --fields="name:string:unique" --soft-deletes=false
 ./vendor/bin/sail artisan make:module Product --fields="name:string,sku:string:unique,price:decimal,stock:integer,is_active:boolean,released_on:date:nullable,category_id:foreignId"
