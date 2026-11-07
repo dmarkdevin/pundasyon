@@ -1,0 +1,27 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Http\Requests\Api\V1;
+
+use App\Models\{{ Model }};
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
+final class Store{{ Model }}Request extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return $this->user()?->can('create', {{ Model }}::class) ?? false;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function rules(): array
+    {
+        return [
+{{ storeRules }}
+        ];
+    }
+}

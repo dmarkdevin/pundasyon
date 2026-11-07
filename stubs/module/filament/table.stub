@@ -1,0 +1,59 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Filament\Resources\{{ Models }}\Tables;
+
+use Filament\Actions\ActionGroup;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ForceDeleteAction;
+use Filament\Actions\RestoreAction;
+use Filament\Actions\RestoreBulkAction;
+use Filament\Actions\ViewAction;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
+use Filament\Tables\Filters\TrashedFilter;
+use Filament\Tables\Table;
+
+final class {{ Models }}Table
+{
+    public static function configure(Table $table): Table
+    {
+        return $table
+            ->columns([
+{{ tableColumns }}
+                TextColumn::make('created_at')->label('Created')->since()->sortable()->toggleable(isToggledHiddenByDefault: true),
+            ])
+            ->defaultSort('created_at', 'desc')
+            ->filters([
+{{ tableFilters }}
+{{#softDeletes}}
+                TrashedFilter::make(),
+{{/softDeletes}}
+            ])
+            ->recordActions([
+                ViewAction::make(),
+                EditAction::make(),
+                ActionGroup::make([
+                    DeleteAction::make(),
+{{#softDeletes}}
+                    RestoreAction::make(),
+                    ForceDeleteAction::make(),
+{{/softDeletes}}
+                ]),
+            ])
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make()->authorizeIndividualRecords('delete'),
+{{#softDeletes}}
+                    RestoreBulkAction::make()->authorizeIndividualRecords('restore'),
+{{/softDeletes}}
+                ]),
+            ]);
+    }
+}

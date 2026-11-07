@@ -1,0 +1,19 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Database\Seeders;
+
+use App\Models\{{ Model }};
+use Illuminate\Database\Seeder;
+
+/**
+ * Sample {{ pluralLabel }}: `php artisan db:seed --class={{ Model }}Seeder`.
+ */
+final class {{ Model }}Seeder extends Seeder
+{
+    public function run(): void
+    {
+        {{ Model }}::factory()->count(10)->create();
+    }
+}
