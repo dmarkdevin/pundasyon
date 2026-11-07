@@ -7,9 +7,9 @@ use App\Models\User;
 use Spatie\Activitylog\Models\Activity;
 
 it('lists users with pages, filters and sorting', function (): void {
-    $admin = userWithRole(SystemRole::Admin, ['name' => 'Zed Admin']);
+    $admin = userWithRole(SystemRole::Admin, ['name' => 'Zed Admin', 'email' => 'zed@example.com']);
     User::factory()->create(['name' => 'Ana Reyes', 'email' => 'ana@example.com']);
-    User::factory()->suspended()->create(['name' => 'Ben Cruz']);
+    User::factory()->suspended()->create(['name' => 'Ben Cruz', 'email' => 'ben@example.com']);
 
     asApiUser($admin)->getJson('/api/v1/users?per_page=2&sort=name')
         ->assertOk()
