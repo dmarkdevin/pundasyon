@@ -4,6 +4,8 @@ Notable changes, newest first. The format follows [Keep a Changelog](https://kee
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-11-07
+
 ### Security
 
 - OWASP Top 10 review before release; all findings fixed or documented in [docs/security-review.md](docs/security-review.md). Notably: nobody can change or impersonate an account with more access than theirs; uploads can't point at other private files; the account lockout can't be used to lock someone out from elsewhere; password reset doesn't reveal which emails have accounts; API tokens are revoked on password change or deletion and expire after 90 days by default.
@@ -22,3 +24,6 @@ Notable changes, newest first. The format follows [Keep a Changelog](https://kee
 - Sign-up you can turn off, email confirmation, password reset, two-factor sign-in with recovery codes, password rules with a breached-password check, account lockout, sign-in history and "log out other devices".
 - Security headers, HTTPS redirects and HSTS in production.
 - Laravel Sail setup with a queue worker and scheduler, Pest, Pint, Larastan level 8, GitHub Actions on SQLite, MySQL and PostgreSQL, and Dependabot.
+
+[Unreleased]: https://github.com/dmarkdevin/pundasyon/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/dmarkdevin/pundasyon/releases/tag/v1.0.0

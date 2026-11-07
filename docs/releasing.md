@@ -45,14 +45,16 @@ gh release create v1.0.0 --title "Pundasyon 1.0.0" --notes-file <(sed -n '/## \[
 
 ## v1.0.0 status
 
-Checked on 2026-11-07, before the code was first committed:
+Checked on 2026-11-07:
 
 | Item | Status |
 |---|---|
-| Tests, style, static analysis | Pass locally (204 tests, Larastan level 8) |
-| Module generator check | Pass (24 generated tests) |
+| Tests, style, static analysis | Pass locally and on GitHub (206 tests, Larastan level 8) |
+| Module generator check | Pass, locally and on GitHub |
+| CI on GitHub | Pass on SQLite, MySQL and PostgreSQL |
 | Fresh install from the files a commit would contain | Pass, after fixing three problems it found: `.env.example` used SQLite and wrote emails to a log file, and `app:install` failed if run while MySQL was still starting |
+| Building-features guide | Every example applied to the code and passing `composer check` (259 tests), then removed. This found a bug, now fixed: a second `app:install --demo` duplicated module sample data |
 | OWASP Top 10 review | Done: 13 findings, all fixed, 3 accepted risks documented. See [security review](security-review.md) |
 | Dependency audits | `composer audit` and `npm audit`: no known vulnerabilities |
-| CI on GitHub | Not run yet: needs the code pushed |
-| Tag and release | Not done: needs the code committed and pushed |
+| Private vulnerability reporting | On |
+| Tag and release | v1.0.0 |
