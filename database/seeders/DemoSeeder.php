@@ -13,6 +13,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Modules\ModuleRegistry;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 /**
@@ -55,11 +56,11 @@ final class DemoSeeder extends Seeder
             }
         }
 
-        // Sample records for every module made with make:module.
+        // Sample records for every module made with make:module, unless it already has some.
         foreach (ModuleRegistry::all() as $model => $module) {
             $seeder = "Database\\Seeders\\{$model}Seeder";
 
-            if (class_exists($seeder) && Schema::hasTable($module['table'])) {
+            if (class_exists($seeder) && Schema::hasTable($module['table']) && DB::table($module['table'])->doesntExist()) {
                 $this->call($seeder);
             }
         }

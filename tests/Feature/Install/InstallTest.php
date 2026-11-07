@@ -95,3 +95,23 @@ it('says why the database step failed, and that running again is safe', function
         ->and($output)->toContain('The database couldn\'t be set up')
         ->and($output)->toContain('safe to repeat');
 });
+
+// Runs inside `composer check:generator`, which makes the GeneratorCheck modules; skipped otherwise.
+it('adds GeneratorCheck module samples on the first demo install only', function (): void {
+    $model = 'App\\Models\\GeneratorCheckItem';
+
+    if (! class_exists($model)) {
+        $this->markTestSkipped('Only runs while composer check:generator has made the sample modules.');
+    }
+
+    $options = ['--name' => 'Owner', '--email' => 'owner@example.com', '--password' => 'Correct-horse-42', '--demo' => true, '--no-interaction' => true];
+
+    $this->artisan('app:install', $options)->assertSuccessful();
+    $records = $model::query()->count();
+    $users = User::query()->count();
+    $this->artisan('app:install', $options)->assertSuccessful();
+
+    expect($records)->toBeGreaterThan(0)
+        ->and($model::query()->count())->toBe($records)
+        ->and(User::query()->count())->toBe($users);
+});
