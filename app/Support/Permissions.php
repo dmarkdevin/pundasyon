@@ -38,8 +38,16 @@ final class Permissions
         /** @var array<string, list<string>> $core */
         $core = config('permissions.modules', []);
 
-        // A generated module can't redefine a core one, such as "users".
-        return [...self::generatedModules(), ...$core];
+        // Lists for the same module are combined: config/permissions.php can add
+        // actions to a generated module (such as "products.discontinue"), and a
+        // generated module can never take actions away from a core one.
+        $modules = self::generatedModules();
+
+        foreach ($core as $module => $actions) {
+            $modules[$module] = array_values(array_unique([...($modules[$module] ?? []), ...$actions]));
+        }
+
+        return $modules;
     }
 
     /**

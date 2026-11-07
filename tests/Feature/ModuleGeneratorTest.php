@@ -151,6 +151,20 @@ it('never lets a generated module redefine a core module\'s permissions', functi
     }
 });
 
+it('adds actions from config/permissions.php to a generated module', function (): void {
+    $registry = (string) file_get_contents(ModuleRegistry::path());
+    ModuleRegistry::put('Gizmo', ['permission' => 'gizmos', 'actions' => ['view', 'update'], 'table' => 'gizmos', 'title' => 'id', 'files' => [], 'created_at' => now()->toIso8601String()]);
+    config(['permissions.modules.gizmos' => ['discontinue']]);
+
+    try {
+        Permissions::reset();
+        expect(Permissions::modules()['gizmos'])->toBe(['view', 'update', 'discontinue']);
+    } finally {
+        file_put_contents(ModuleRegistry::path(), $registry);
+        Permissions::reset();
+    }
+});
+
 it('explains when there is no such module to remove', function (): void {
     $this->artisan('remove:module', ['name' => 'Nothing'])->expectsOutputToContain('no module called Nothing')->assertFailed();
 });
