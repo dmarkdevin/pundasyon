@@ -73,7 +73,7 @@ After changing a template, run `composer check:generator`. It makes two linked s
 
 ## After generating
 
-Generated code is yours. Typical next steps:
+Generated code is yours. [Building features](building-features.md) walks through changing it step by step. Typical next steps:
 
 - Add a navigation group: `protected static string|UnitEnum|null $navigationGroup = 'Catalogue';` in the resource.
 - Add a dashboard widget: create a class in `app/Filament/Widgets` with a `canView()` that checks `products.view`.

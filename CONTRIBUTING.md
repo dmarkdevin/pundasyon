@@ -5,7 +5,7 @@ Thanks for helping. Bug reports, fixes, documentation and new features are all w
 ## Before you start
 
 - For a bug, open an issue with the steps to reproduce it, what you expected and what happened.
-- For a new feature, open an issue first to talk it through, so your time isn't spent on something that won't be merged.
+- For a new feature, open an issue first to talk it through, so your time isn't spent on something that won't be merged. [Building features](docs/building-features.md) shows how features are put together.
 - For a security problem, don't open an issue: follow [SECURITY.md](SECURITY.md).
 
 ## Setting up

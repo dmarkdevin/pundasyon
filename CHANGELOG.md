@@ -10,6 +10,7 @@ Notable changes, newest first. The format follows [Keep a Changelog](https://kee
 
 ### Added
 
+- Guides: [building features](docs/building-features.md), with tested tutorials for CRUD modules, custom actions, records people own, exports, settings, scheduled jobs, emails and API versions; and [make it yours](docs/make-it-yours.md), for starting your own app from Pundasyon.
 - `php artisan app:install`: sets up the app key, database, roles and permissions, storage link and the first super admin; `--demo` adds demo accounts and sample data.
 - Module generator: `make:module` writes a model, migration, factory, seeder, policy, permissions, admin screens, API endpoints and Pest tests; `remove:module` takes them out again.
 - REST API at `/api/v1` with Sanctum tokens limited to chosen permissions, per-token rate limits, filtering, sorting, paging, one error format, and interactive docs at `/docs/api`.

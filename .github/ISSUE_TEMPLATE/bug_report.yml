@@ -1,0 +1,45 @@
+name: Bug report
+description: Something in Pundasyon doesn't work as documented.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: For a security problem, don't open an issue. Report it privately as described in SECURITY.md.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead. Include the full error message.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Fresh clone, `app:install --demo`
+        2. Sign in as admin@example.com
+        3. ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Pundasyon version or commit
+      placeholder: v1.0.0, or the output of `git rev-parse --short HEAD`
+    validations:
+      required: true
+  - type: dropdown
+    id: database
+    attributes:
+      label: Database
+      options: [MySQL, PostgreSQL, SQLite]
+    validations:
+      required: true
+  - type: dropdown
+    id: runs-on
+    attributes:
+      label: Running with
+      options: [Laravel Sail, A server, Something else]
+    validations:
+      required: true

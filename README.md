@@ -1,5 +1,11 @@
 # Pundasyon
 
+[![CI](https://github.com/dmarkdevin/pundasyon/actions/workflows/ci.yml/badge.svg)](https://github.com/dmarkdevin/pundasyon/actions/workflows/ci.yml)
+[![Licence: MIT](https://img.shields.io/badge/licence-MIT-blue.svg)](LICENSE)
+![PHP 8.4](https://img.shields.io/badge/PHP-8.4-777bb4.svg)
+![Laravel 13](https://img.shields.io/badge/Laravel-13-ff2d20.svg)
+![Filament 5](https://img.shields.io/badge/Filament-5-f59e0b.svg)
+
 *Pundasyon* is Filipino for "foundation". It's an open-source Laravel starter that gives you the parts every app needs, so you can start on what makes yours different: a CRM, an inventory system, a school system or a SaaS.
 
 - **Sign-in and security**: sign-up you can turn off, email confirmation, password reset, two-factor sign-in, account lockout, sign-in history and "log out other devices".
@@ -10,6 +16,8 @@
 
 MIT licensed. Built with Laravel 13, PHP 8.4 and Filament 5.
 
+**Starting your own app?** Click **Use this template** on GitHub, then read [make it yours](docs/make-it-yours.md) and [building features](docs/building-features.md).
+
 ![Dashboard](docs/screenshots/dashboard.png)
 
 ## Contents
@@ -19,6 +27,7 @@ MIT licensed. Built with Laravel 13, PHP 8.4 and Filament 5.
 - [Quick start](#quick-start)
 - [Everyday commands](#everyday-commands)
 - [Adding a module](#adding-a-module)
+- [Building features](#building-features)
 - [Features](#features)
 - [Documentation](#documentation)
 - [Contributing and security](#contributing-and-security)
@@ -41,7 +50,7 @@ MIT licensed. Built with Laravel 13, PHP 8.4 and Filament 5.
 ## Quick start
 
 ```bash
-git clone <repository-url> pundasyon
+git clone https://github.com/dmarkdevin/pundasyon.git
 cd pundasyon
 cp .env.example .env
 
@@ -101,6 +110,17 @@ Sail runs the app, a queue worker (it sends the emails), a scheduler (it cleans 
 
 You get the model, migration, factory, seeder, policy, `products.*` permissions (given to admins at once), admin screens, `/api/v1/products` endpoints and Pest tests, all following the same rules as the rest of the code. `remove:module Product` takes it out again. See [adding a module](docs/modules.md).
 
+## Building features
+
+[Building features](docs/building-features.md) is a step-by-step guide. Every example in it was run and tested against this code:
+
+1. **A CRUD module, then making it yours**: menu groups, validation, a custom "Discontinue" action with its own permission, policy, admin button and API endpoint, a dashboard widget, and tests.
+2. **Records people own**: each person sees only their own notes, unless they have `notes.view_all`.
+3. **A feature without a module**: an "Export CSV" button on the Users list.
+4. **Recipes**: a setting admins can change, a queued email, a scheduled job and API version 2.
+
+It ends with a checklist to go through before opening a pull request.
+
 ## Features
 
 **Sign-in and security**
@@ -132,6 +152,8 @@ You get the model, migration, factory, seeder, policy, `products.*` permissions 
 
 ## Documentation
 
+- [Make it yours](docs/make-it-yours.md): your own copy, renaming, demo data, the licence and staying up to date.
+- [Building features](docs/building-features.md): step-by-step tutorials and recipes.
 - [Architecture](docs/architecture.md): how the code is organised and why.
 - [Adding a module](docs/modules.md): the generator, field types and customising the templates.
 - [Permissions](docs/permissions.md): roles, permission names, policies and adding your own.
@@ -144,6 +166,6 @@ You get the model, migration, factory, seeder, policy, `products.*` permissions 
 
 ## Contributing and security
 
-Contributions are welcome: read [CONTRIBUTING.md](CONTRIBUTING.md) and the [code of conduct](CODE_OF_CONDUCT.md). To report a vulnerability privately, see [SECURITY.md](SECURITY.md). Changes are listed in the [changelog](CHANGELOG.md).
+Contributions are welcome: [open an issue](https://github.com/dmarkdevin/pundasyon/issues/new/choose) or read [CONTRIBUTING.md](CONTRIBUTING.md) and the [code of conduct](CODE_OF_CONDUCT.md). To report a vulnerability privately, see [SECURITY.md](SECURITY.md). Changes are listed in the [changelog](CHANGELOG.md).
 
 Pundasyon is open source under the [MIT licence](LICENSE).

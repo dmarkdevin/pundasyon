@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/dmarkdevin/pundasyon/security/advisories/new
+    about: Report privately, not in a public issue.
+  - name: How do I build a feature?
+    url: https://github.com/dmarkdevin/pundasyon/blob/main/docs/building-features.md
+    about: Step-by-step guides for CRUD modules, custom actions, settings, scheduled jobs and the API.
