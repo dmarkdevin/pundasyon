@@ -93,3 +93,34 @@ jobs:
       - run: cp .env.example .env && php artisan key:generate
       # Generates sample modules with every field type, checks them like hand-written code, then removes them.
       - run: bash scripts/check-module-generator.sh
+
+  # The README's quick start on a clean machine with only Docker, on Intel/AMD and on ARM
+  # (what Docker Desktop runs on Apple Silicon).
+  fresh-install:
+    name: Fresh install (${{ matrix.runner }})
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-latest, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - run: cp .env.example .env
+      - name: Install PHP packages with Sail's image
+        run: |
+          docker run --rm -u "$(id -u):$(id -g)" -v "$(pwd):/var/www/html" -w /var/www/html \
+            laravelsail/php84-composer:latest composer install --ignore-platform-reqs --no-interaction --no-progress
+      - run: ./vendor/bin/sail up -d --wait
+      - name: Install with demo data
+        # A throwaway password for this test run only.
+        run: ./vendor/bin/sail artisan app:install --demo --name=Owner --email=owner@example.com --password="Fresh-install-$GITHUB_RUN_ID" --no-interaction
+      - run: ./vendor/bin/sail npm install && ./vendor/bin/sail npm run build
+      - name: The sign-in page answers
+        run: curl -fsS -o /dev/null http://localhost:8087/app/login
+      - if: failure()
+        run: ./vendor/bin/sail logs --tail=80
+      - if: always()
+        run: ./vendor/bin/sail down -v
